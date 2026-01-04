@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Boggle Party</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <!-- Intro / Splash Screen -->
+    <div id="view-splash" class="view active">
+        <div class="logo-container">
+            <h1 class="netflix-logo">BOGGLE</h1>
+            <div class="loading-spinner"></div>
+            <p id="splash-status">Initializing...</p>
+        </div>
+    </div>
+
+    <!-- HOST: Lobby View -->
+    <div id="view-host-lobby" class="view">
+        <div class="host-container">
+            <div class="header">
+                <h2>Join the Game</h2>
+                <div class="subtitle">Scan to join</div>
+            </div>
+            
+            <div class="lobby-content">
+                <div class="qr-section">
+                    <div id="qrcode"></div>
+                    <div class="room-code-display">Room Code: <span id="display-room-code">...</span></div>
+                </div>
+                
+                <div class="players-section">
+                    <h3>Players Joined (<span id="player-count">0</span>)</h3>
+                    <div id="player-list" class="player-grid">
+                        <!-- Player cards will go here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="host-controls">
+                <button id="btn-start-game" class="btn-primary" disabled>Start Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOST: Game View -->
+    <div id="view-host-game" class="view">
+        <div class="game-header">
+            <div class="timer-container">
+                <span id="game-timer">3:00</span>
+            </div>
+            <div class="game-status">Live</div>
+        </div>
+        
+        <div class="game-board-container">
+            <div id="boggle-grid" class="boggle-grid">
+                <!-- 16 Dice will be injected here -->
+            </div>
+        </div>
+
+        <div class="live-stats-ticker">
+            <div class="ticker-content" id="live-feed">
+                <!-- Live updates of words found -->
+            </div>
+        </div>
+    </div>
+
+    <!-- HOST: Scoring/Results View -->
+    <div id="view-host-results" class="view">
+        <h1>Time's Up!</h1>
+        <div class="results-container">
+            <div id="final-leaderboard" class="leaderboard">
+                <!-- Rankings -->
+            </div>
+        </div>
+        <button id="btn-return-lobby" class="btn-secondary">Back to Lobby</button>
+    </div>
+
+    <!-- CLIENT: Join View -->
+    <div id="view-client-join" class="view">
+        <div class="mobile-container">
+            <h2>Enter Name</h2>
+            <input type="text" id="inp-player-name" placeholder="Your Name" maxlength="12" autocomplete="off">
+            <button id="btn-join-game" class="btn-primary">Join Game</button>
+        </div>
+    </div>
+
+    <!-- CLIENT: Waiting View -->
+    <div id="view-client-waiting" class="view">
+        <div class="mobile-centered">
+            <h3>You're In!</h3>
+            <p>Wait for the host to start.</p>
+            <div class="pulse-circle"></div>
+        </div>
+    </div>
+
+    <!-- CLIENT: Game View -->
+    <div id="view-client-game" class="view">
+        <div class="mobile-header">
+            <div class="mobile-timer" id="client-timer">3:00</div>
+            <div class="mobile-score">Score: <span id="client-score">0</span></div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="inp-word" placeholder="Type word..." autocomplete="off" autocapitalize="characters">
+            <button id="btn-submit-word" class="btn-large">SUBMIT</button>
+        </div>
+
+        <div class="found-words-list">
+            <h4>My Words</h4>
+            <ul id="client-word-list">
+                <!-- <li>Word <span class="points">+3</span></li> -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- CLIENT: Game Over View -->
+    <div id="view-client-gameover" class="view">
+        <div class="mobile-centered">
+            <h1>Game Over</h1>
+            <p>Check the main screen for results!</p>
+            <div class="final-score">Final Score: <span id="client-final-score">0</span></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

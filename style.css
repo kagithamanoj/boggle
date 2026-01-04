@@ -1,0 +1,302 @@
+:root {
+    --bg-color: #141414;
+    --text-color: #ffffff;
+    --primary-red: #E50914;
+    --primary-hover: #b2070f;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --dice-bg: #f5f5f5;
+    --dice-text: #141414;
+    --font-heading: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none; /* Prevent selection for app-like feel */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    height: 100vh;
+    overflow: hidden; /* Prevent scrolling on main body */
+}
+
+/* --- Utility --- */
+.view {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease;
+}
+
+.view.active {
+    display: flex;
+}
+
+.btn-primary {
+    background-color: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* --- Splash --- */
+.netflix-logo {
+    color: var(--primary-red);
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    letter-spacing: 4px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- Host Lobby --- */
+.host-container {
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header h2 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+}
+
+.lobby-content {
+    display: flex;
+    gap: 4rem;
+    flex: 1;
+}
+
+.qr-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.room-code-display {
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.players-section {
+    flex: 1;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.player-card {
+    background: rgba(0,0,0,0.5);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--glass-border);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- Host Game --- */
+.game-header {
+    width: 100%;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+}
+
+.timer-container {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--text-color);
+}
+
+.timer-container.low-time {
+    color: var(--primary-red);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.boggle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #222;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.dice {
+    width: 120px;
+    height: 120px;
+    background: var(--dice-bg);
+    color: var(--dice-text);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: bold;
+    box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.dice.new-game-anim {
+    animation: rollDice 0.8s ease-out;
+}
+
+@keyframes rollDice {
+    0% { transform: rotate(0deg) scale(0.5); opacity: 0; }
+    100% { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+
+/* --- Mobile Client --- */
+.mobile-container {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    background: #333;
+    color: white;
+    text-transform: uppercase;
+}
+
+input[type="text"]:focus {
+    outline: 2px solid var(--primary-red);
+}
+
+.mobile-header {
+    width: 100%;
+    padding: 1rem;
+    background: #000;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+#view-client-game {
+    justify-content: flex-start;
+    padding-top: 80px; /* Space for header */
+}
+
+.input-area {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#btn-submit-word {
+    padding: 0 1.5rem;
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.found-words-list {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: #111;
+}
+
+.found-words-list ul {
+    list-style: none;
+}
+
+.found-words-list li {
+    padding: 0.8rem;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    color: #aaa;
+}
+
+.found-words-list li.valid {
+    color: #46d369;
+}
+
+.found-words-list li.invalid {
+    color: #e50914;
+    text-decoration: line-through;
+}
