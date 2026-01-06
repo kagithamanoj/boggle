@@ -12,14 +12,18 @@ A web-based Boggle game with a powerful built-in solver.
 - **Random Board**: Generate new boards instantly.
 
 ## Project Structure
-- **Game**: `index.html`, `script.js`, `style.css` (Root directory).
-- **Solver**: `solver/solver.py` (Python command-line tool).
+- **Game**: `game/` (Web application files).
+- **Solver**: `solver/` (Python command-line tool).
 
 ## Running Locally
 1. Clone the repo.
-2. Open `index.html` in your browser.
+2. Open `game/index.html` in your browser.
 
 ## Running the Python Solver
 ```bash
 python3 solver/solver.py <grid_string>
 ```
+
+## Deployment Note
+Since the game is now in the `game/` folder, your GitHub Pages URL might need to include `/game`, e.g., `https://kagithamanoj.github.io/boggle/game/`.
+Alternatively, change your GitHub Pages source settings to point to the `game` folder if possible, or use a root `index.html` redirect.
